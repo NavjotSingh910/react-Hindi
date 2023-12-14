@@ -15,6 +15,11 @@ npm run start   (first we always use run for start  at beginner level)
 - App.css
 - index.css
 
+### Check and understand files like:
+- public - > index.html
+- src    - > index.js
+- package.json  (under dependencies find react-scripts that is responsible to inject script in html file )
+
 
 
 ## install react by using npx 
@@ -31,3 +36,9 @@ npm run dev
 - assets folder
 - App.css
 - index.css
+
+
+### Check and understand files like:
+- index.html (we find it in main or root of the folder (bhr hi pada hoga) )
+- src    - > index.jsx
+- package.json  (under dependencies it cannot provide  react-scripts so here in vite direct  inject script in index.html file  )
