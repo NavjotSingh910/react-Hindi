@@ -27,3 +27,7 @@ npm install (for node_modules folder)
 npm run dev
 
 ```
+### Delete extra files From vite project
+- assets folder
+- App.css
+- index.css
