@@ -78,3 +78,6 @@ npm run dev
 - When we create components(functions) Capitalize name
 - File Name also Capitalize
 - Some libraries force as to make a component file  name with .jsx extension if they return html elements
+
+# Virtual Dom
+[Read on git hub documentation](https://github.com/acdlite/react-fiber-architecture)
