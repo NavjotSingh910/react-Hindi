@@ -62,3 +62,57 @@ export default function App() {
 - pixels
 - dev ui 
 - tailwind
+
+
+#
+#
+
+# Props
+we are use props for give dynamic properties 
+``card.js``
+```jsx
+// function Card(props){
+function Card({name,definedObj={name:'null',email:"null@navjot.com"}}){//default values and also give direct props propties using{} 
+    // console.log(props.name)
+    console.log(name)
+    console.log(definedObj["name"],definedObj.email)
+    return (<div className="relative h-[400px] w-[300px] rounded-md">
+    <div className="absolute bottom-4 left-4 text-left">
+      <h1 className="text-lg font-semibold text-white">{definedObj.name}</h1>
+      <p className="mt-2 text-sm text-gray-300">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi,
+        debitis? Email:{definedObj.email}
+      </p>
+      <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
+        View Profile →
+      </button>
+    </div>
+  </div>)
+}
+export default Card
+```
+
+``App.js``
+```jsx
+
+import './App.css'
+import Card from './components/Card';
+
+function App() {
+  let directObj={name:'navjot',email:"navjot@navjot.com"};
+  let DirectArray=[1,2,3,4];
+  return (
+    <>
+    <h1 className='bg-green-400 text-black p-4 rounded-xl mb-4'>Tailwind Test</h1>
+    <Card name='Navjot' definedObj={directObj} rollNo='21071283' definedArray={DirectArray}/>
+    <Card name='Imran' definedObj={directObj} rollNo='21071283' definedArray={DirectArray}/>
+    {/* <Card name='Navjot' directObj={} DirectArray=[1,2,3,4]/> Direct object and array are not  */}
+    {/* <Card name='Navjot' /> */}
+    {/* <Card/> */}
+    </>
+  )
+}
+
+export default App
+
+```
