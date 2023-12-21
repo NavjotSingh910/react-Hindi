@@ -1,15 +1,21 @@
 // Importing necessary React hooks
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect , useRef} from "react";
 
 // Functional Component - App
 function App() {
+  //useState
   // State variables
   const [length, setLength] = useState(8);
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
+  
+  //useRef hook
+  const passwordRef=useRef(null) 
+  console.log(passwordRef);
 
   // Password Generator Function
+  //useCallback:useCallback will return a memoized version of the callback that only changes if one of the inputs has changed.
   const passwordGenerator = useCallback(() => {
     // Initialize an empty password string and character set
     let pass = "";
@@ -30,6 +36,13 @@ function App() {
     // Set the generated password in the state
     setPassword(pass);
   }, [length, numberAllowed, charAllowed, setPassword]);
+
+
+  const copyPasswordToClipboard=useCallback(()=>{
+    passwordRef.current?.select();  
+    passwordRef.current?.setSelectionRange(0,3);//its not effect on copy 
+    window.navigator.clipboard.writeText(password)
+  },[password]) 
 
   // useEffect Hook - Trigger password generation when dependencies change
   useEffect(() => {
@@ -52,8 +65,9 @@ function App() {
               placeholder="Password"
               readOnly
               className="outline-none bg-gray-800 text-gray-100 px-1 py-3 w-full"
+              ref={passwordRef}
             />
-            <button className="outline-none px-3 py-0.5 shrink-0 bg-teal-600">
+            <button onClick={copyPasswordToClipboard} className="outline-none px-3 py-0.5 shrink-0 bg-teal-600">
               Copy
             </button>
           </div>
