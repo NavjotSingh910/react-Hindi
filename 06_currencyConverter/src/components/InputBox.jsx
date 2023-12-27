@@ -2,20 +2,22 @@
 import React, { useId } from "react";
 
 function InputBox({
-  label,
-  amount,
-  onAmountChange,
-  onCurrencyChange,
-  currencyOptions = [],
-  selectCurrency = "usd",
-  amountDisable = false,
-  currencyDisable = false,
-  className = "",
+  label,// label means  From or To
+  amount, //how much amount
+  onAmountChange, //what happen when ammount change
+  onCurrencyChange, //what happen when currency change like inr , usd
+  currencyOptions = [], // what opitions show in currency dropdown
+  selectCurrency = "usd", //selected currency value
+  amountDisable = false, //amount is changble or not 
+  currencyDisable = false, //currency option is changeble or not 
+  className = "", //custom css pass 
 }) {
+  console.log("Render Input Box ");
   const ammountInputId = useId();
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex `}>
       <div className="w-1/2">
+        {/* input box and there label */}
         <label
           htmlFor={ammountInputId}
           className="text-black/40 mb-2 inline-block"
@@ -35,11 +37,12 @@ function InputBox({
         />
       </div>
       <div className="w-1/2 flex flex-wrap justify-end text-right">
+          {/* dropdown of currency */}
         <p className="text-black/40 mb-2 w-full">Currency Type</p>
         <select
           className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
           value={selectCurrency}
-          onChange={(e) => onCurrencyChange && onAmountChange(e.target.value)}
+          onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
           disabled={currencyDisable}
         >
           {currencyOptions.map((currency) => (

@@ -5,22 +5,24 @@ import { InputBox } from './components';
 
 
 function App() {
-  const [amount,setAmount]=useState(0)
-  const [to,setTo]=useState('inr')
-  const [from,setFrom]=useState('usd')
-  const [convertedAmount,setConvertedAmount]=useState(0)
+    console.log("Render App ");
+  const [amount,setAmount]=useState(null)  //how much amount
+  const [to,setTo]=useState('inr') //intiail value that is selected in drop down
+  const [from,setFrom]=useState('usd') //intiail value that is selected in drop down
+  const [convertedAmount,setConvertedAmount]=useState(null) // hold the value for To Input box that is converted 
   
-  const currencyInfo=useCurrencyInfo(from);
-  console.log(currencyInfo[from])
-  const options=Object.keys(currencyInfo);
-  console.log(options)
-  const swap =()=>{
+  const currencyInfo=useCurrencyInfo(from);//call custom hook and that call api and it gives the object with all countries from to to
+  //console.log("countery and there currency",currencyInfo)//print country names  and there values 
+  const options=Object.keys(currencyInfo);//pick the only country names (keys)
+  //console.log(options)
+  const swap =()=>{ //swap function is use for when we click on swap button it change the value of To and From
     setFrom(to);
     setTo(from);
-    setConvertedAmount(amount);
+    setConvertedAmount(amount); 
     setAmount(convertedAmount);
 
   }
+  //FUCTION  FOR  convert the amount of from to selected currency
   const convert=()=>{
     setConvertedAmount(amount*currencyInfo[to])
   }
@@ -42,21 +44,25 @@ return (
           <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
               <form
                   onSubmit={(e) => {
-                      e.preventDefault();
-                     convert();
+                      e.preventDefault();//when form submit then prevent default events 
+                     convert(); //convert the value 
                   }}
               >
                   <div className="w-full mb-1">
+
+                    {/* inputbox component render here  */}
                       <InputBox
-                          label="From"
-                          amount={amount}
-                          currencyOptions={options}
-                          selectCurrency={from}
-                          onCurrencyChange={(currency)=>{
-                            return setAmount(amount);
+                          label="From" //pass the label for first input box 
+                          amount={amount} //send the intial amount 
+                          currencyOptions={options} //send all currency names 
+                          selectCurrency={from} //selected currrency 
+                          onCurrencyChange={(currency)=>{ //what happen when currency change like if someone select other option in countery 
+                            return setFrom(currency);//set new from value 
                           }}
                           onAmountChange={(amount)=>setAmount(amount)}
                       />
+
+
                   </div>
                   <div className="relative w-full h-0.5">
                       <button
@@ -68,6 +74,8 @@ return (
                       </button>
                   </div>
                   <div className="w-full mt-1 mb-4">
+
+                     {/* inputbox component render here  */}
                       <InputBox
                           label="To"
                           amount={convertedAmount}
@@ -78,6 +86,7 @@ return (
                           }}
                          
                          />
+
                   </div>
                   <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
                       Convert {from.toUpperCase()} to {to.toUpperCase()}
