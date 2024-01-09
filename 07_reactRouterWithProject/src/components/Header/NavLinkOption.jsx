@@ -4,7 +4,7 @@ function NavLinkOption({label=""}) {
   return (
     <li>
       <NavLink
-        to={label}
+        to={label.toLowerCase()==='user'?'/user/Navjot':`${label.toLowerCase()}`}
         className={({ isActive }) =>
           `block py-2 pr-4 pl-3 duration-200 border-b ${
             isActive ? "text-orange-700" : "text-gray-700"

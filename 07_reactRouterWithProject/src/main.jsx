@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout'
-import {Home,About,Contact,GitHub,User} from './components'
+import {Home,About,Contact,GitHub,User,githubInfoLoader} from './components'
 
 // const myRouter=createBrowserRouter([
 //   {
@@ -35,9 +35,14 @@ const myRouter= createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
       <Route path='' element={<Home/>}/>
-      <Route path='about' element={<About/>}/>
+      <Route path='about' element={<About/>}>
+        {/* nesting of path
+        <Route path='hitesh' element={<Home/>}/> not working read more for this*/}
+      </Route>
       <Route path='contact' element={<Contact/>}/>
-      <Route path='github' element={<GitHub/>}/>
+      <Route
+        loader={githubInfoLoader}
+       path='github' element={<GitHub/>}/>
       <Route path='user/:userid' element={<User/>}/>
     </Route>
   )
